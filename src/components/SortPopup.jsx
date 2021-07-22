@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-function SortPopup({ items = [] }) {
+function SortPopup({ items }) {
   const [openedPopup, setOpenedPopup] = React.useState(false);
   const [activeItem, setActiveItem] = React.useState(0);
   const sortBlock = React.useRef(null);
@@ -29,7 +31,9 @@ function SortPopup({ items = [] }) {
     <div className="sort" ref={sortBlock}>
       <div className="sort__label">
         <svg
-          className={openedPopup ? 'rotated' : ''}
+          className={classNames({
+            rotated: openedPopup
+          })}
           width="10"
           height="6"
           viewBox="0 0 10 6"
@@ -50,7 +54,9 @@ function SortPopup({ items = [] }) {
               return (
                 <li
                   key={`${item}_${index}`}
-                  className={activeItem === index ? 'active' : ''}
+                  className={classNames({
+                    active: activeItem === index
+                  })}
                   onClick={() => selectSort(index)}>
                   {item}
                 </li>
@@ -61,6 +67,14 @@ function SortPopup({ items = [] }) {
       )}
     </div>
   );
+}
+
+SortPopup.propTypes = {
+  items: PropTypes.array
+}
+
+SortPopup.defaultProps = {
+  items: []
 }
 
 export default SortPopup;

@@ -1,6 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-function Categories({ items = [] }) {
+function Categories({ items }) {
+  console.log(items);
   const [activeItem, setActiveItem] = React.useState(0);
 
   const selectItem = (index) => {
@@ -14,7 +17,9 @@ function Categories({ items = [] }) {
           return (
             <li
               key={`${name}_${index}`}
-              className={`${activeItem === index ? 'active' : ''}`}
+              className={classNames({
+                active: activeItem === index
+              })}
               onClick={() => selectItem(index)}>
               {name}
             </li>
@@ -23,6 +28,14 @@ function Categories({ items = [] }) {
       </ul>
     </div>
   );
+}
+
+Categories.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.string.isRequired)
+}
+
+Categories.defaultProps = {
+  items: []
 }
 
 export default Categories;

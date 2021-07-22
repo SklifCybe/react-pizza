@@ -1,11 +1,17 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function Button({children}) {
   return (
-    <a href="/cart.html" className="button button--cart">
+    <Link to="/cart.html" className="button button--cart">
       {children}
-    </a>
+    </Link>
   ) 
+}
+
+Button.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Button;
