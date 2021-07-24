@@ -1,13 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import { Categories, SortPopup, PizzaBlock } from '../components';
 
-function Home({ items }) {
+import { useDispatch } from 'react-redux';
+import { setCategory } from '../redux/actions/filters';
+
+function Home() {
+  const items = useSelector(({ pizzas }) => pizzas.items);
+
+  const dispatch = useDispatch();
+
   return (
     <div className="container">
       <div className="content__top">
-        <Categories items={['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']} />
+        <Categories
+          items={['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']}
+          onClickItem={(index) => {
+            dispatch(setCategory(index));
+          }}
+        />
         <SortPopup
           items={[
             { name: 'популярности', type: 'popular' },
@@ -25,13 +37,5 @@ function Home({ items }) {
     </div>
   );
 }
-
-Home.propTypes = {
-  items: PropTypes.array,
-};
-
-Home.defaultProps = {
-  items: [],
-};
 
 export default Home;

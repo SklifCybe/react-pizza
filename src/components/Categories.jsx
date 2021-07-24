@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-function Categories({ items }) {
+function Categories({ items, onClickItem }) {
   const [activeItem, setActiveItem] = React.useState(0);
 
   const selectItem = (index) => {
     setActiveItem(index);
+    onClickItem(index);
   };
 
   return (
@@ -30,11 +31,13 @@ function Categories({ items }) {
 }
 
 Categories.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string.isRequired)
+  items: PropTypes.arrayOf(PropTypes.string.isRequired),
+  onClickItem: PropTypes.func
 }
 
 Categories.defaultProps = {
-  items: []
+  items: [],
+  onClickItem: null
 }
 
 export default Categories;
