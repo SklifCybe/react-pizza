@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 function Categories({ items }) {
-  console.log(items);
   const [activeItem, setActiveItem] = React.useState(0);
 
   const selectItem = (index) => {
