@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-function SortPopup({ items }) {
+function SortPopup({ items, onClickItem, activeItem }) {
   const [openedPopup, setOpenedPopup] = React.useState(false);
-  const [activeItem, setActiveItem] = React.useState(0);
   const sortBlock = React.useRef(null);
-  const activeLabel = items[activeItem].name;
+
+  const activeLabel = items.find(obj => obj.type === activeItem).name;
 
   const togglePopup = () => {
     setOpenedPopup(!openedPopup);
   };
 
   const selectSort = (index) => {
-    setActiveItem(index);
+    onClickItem(index);
     setOpenedPopup();
   };
 
@@ -57,7 +57,7 @@ function SortPopup({ items }) {
                   className={classNames({
                     active: activeItem === index
                   })}
-                  onClick={() => selectSort(index)}>
+                  onClick={() => selectSort(obj)}>
                   {obj.name}
                 </li>
               );
@@ -70,11 +70,13 @@ function SortPopup({ items }) {
 }
 
 SortPopup.propTypes = {
-  items: PropTypes.array
+  items: PropTypes.array,
+  activeItem: PropTypes.string.isRequired
 }
 
 SortPopup.defaultProps = {
-  items: []
+  items: [],
+  activeItem: 'popular'
 }
 
 export default SortPopup;
