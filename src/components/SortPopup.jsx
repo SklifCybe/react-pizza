@@ -18,7 +18,8 @@ function SortPopup({ items, onClickItem, activeItem }) {
   };
 
   const handleOutsideClick = (event) => {
-    if (!event.path.includes(sortBlock.current)) {
+    const path = event.composedPath();
+    if (!path.includes(sortBlock.current)) {
       setOpenedPopup(false);
     }
   };

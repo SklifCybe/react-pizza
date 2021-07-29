@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 function Button({children}) {
   return (
-    <Link to="/cart.html" className="button button--cart">
+    <Link to="/cart" className="button button--cart">
       {children}
     </Link>
   ) 
